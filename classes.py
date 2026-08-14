@@ -1,7 +1,7 @@
 from collections import UserDict
 import re
 from datetime import datetime
-from handlers import get_upcoming_birthdays
+from birthday_handlers import get_upcoming_birthdays
 
 phone_regex = r'^\d{10}$'
 

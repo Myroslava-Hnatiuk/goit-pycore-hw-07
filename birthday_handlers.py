@@ -16,7 +16,6 @@ def build_birthday_record(user: dict[str, str], birthday: datetime) -> dict[str,
     }
 
 def get_upcoming_birthdays(users: dict[str, dict[str, str]]) -> list[dict[str, str]]:
-    print(users)
     today = datetime.today().date() # Get today's date as a date object
     upcoming_birthdays = [] # List to store users with upcoming birthdays
 
