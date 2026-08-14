@@ -1,7 +1,5 @@
 from datetime import datetime, timedelta
 
-from classes import Record
-
 def get_congratulations_date(birthday: datetime) -> datetime:
     if birthday.weekday() == 5:  # Saturday
         return birthday + timedelta(days=2) # If the birthday falls on a Saturday, the congratulations date is set to the following Monday (2 days later).
@@ -13,21 +11,22 @@ def get_congratulations_date(birthday: datetime) -> datetime:
 def build_birthday_record(user: dict[str, str], birthday: datetime) -> dict[str, str]:
     congratulation_date = get_congratulations_date(birthday)
     return {
-        "name": user["name"],
+        "name": user.name.value,
         "congratulation_date": congratulation_date.strftime("%Y.%m.%d"),
     }
 
-def get_upcoming_birthdays(users: dict[str, Record]) -> list[dict[str, str]]:
+def get_upcoming_birthdays(users: dict[str, dict[str, str]]) -> list[dict[str, str]]:
+    print(users)
     today = datetime.today().date() # Get today's date as a date object
     upcoming_birthdays = [] # List to store users with upcoming birthdays
 
     for user in users.values(): # Iterate through each user in the dictionary
-        birthday = datetime.strptime(user["birthday"], "%Y.%m.%d").date() # Convert the birthday string to a date object
+        birthday = user.birthday.value  # .value contains the datetime object
         birthday_this_year = datetime(
             today.year,
             birthday.month,
             birthday.day
-        ).date() # Create a date object for the user's birthday in the current year
+        ).date()
        
         if birthday_this_year < today:
             birthday_this_year = birthday_this_year.replace(year=today.year + 1)

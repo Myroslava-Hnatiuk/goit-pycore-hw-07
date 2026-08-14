@@ -86,7 +86,7 @@ book = AddressBook()
 john_record = Record("John")
 john_record.add_phone("1234567890")
 john_record.add_phone("5555555555")
-john_record.add_birthday('20.08.2000')
+john_record.add_birthday('15.08.2000')
 
 # # Додавання запису John до адресної книги
 book.add_record(john_record)
@@ -94,7 +94,7 @@ book.add_record(john_record)
 # Створення та додавання нового запису для Jane
 jane_record = Record("Jane")
 jane_record.add_phone("9876543210")
-jane_record.add_birthday('15.09.1995')
+jane_record.add_birthday('16.08.1995')
 book.add_record(jane_record)
 
 # # Виведення всіх записів у книзі
