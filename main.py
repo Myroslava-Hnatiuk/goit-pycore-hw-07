@@ -1,4 +1,4 @@
-from bot_handlers import parse_input, add_contact, change_contact, show_phone, show_all
+from bot_handlers import add_birthday, birthdays, parse_input, add_contact, change_contact, show_birthday, show_phone, show_all
 from classes import AddressBook
 
 def main():
@@ -21,6 +21,12 @@ def main():
             print(show_phone(args, book))
         elif command == 'all':
             print(show_all(book))
+        elif command == 'add-birthday':
+            print(add_birthday(args, book))
+        elif command == 'show-birthday':
+            print(show_birthday(args, book))
+        elif command == 'birthdays':
+            print(birthdays(args, book))
         else:
             print("Invalid command.")
 
