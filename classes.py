@@ -25,7 +25,7 @@ class Phone(Field):
 class Birthday(Field):
     def __init__(self, value):
         try:
-            parsed = datetime.strptime(value, "%d.%m.%Y")
+            parsed = datetime.strptime(value, "%d.%m.%Y").date()
             self.value = parsed
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
