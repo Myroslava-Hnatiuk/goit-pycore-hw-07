@@ -20,6 +20,8 @@ def get_upcoming_birthdays(users: dict[str, dict[str, str]]) -> list[dict[str, s
     upcoming_birthdays = [] # List to store users with upcoming birthdays
 
     for user in users.values(): # Iterate through each user in the dictionary
+        if user.birthday is None: # Skip users without a birthday
+            continue
         birthday = user.birthday.value  # .value contains the datetime object
         birthday_this_year = datetime(
             today.year,

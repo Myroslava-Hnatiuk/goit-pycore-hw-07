@@ -1,5 +1,6 @@
 from birthday_handlers import get_upcoming_birthdays
-from classes import AddressBook, Record
+from classes import AddressBook, Record, NotFoundError, NotCorrectArgumentsError
+
 
 def input_error(func):
     def inner(*args, **kwargs):
@@ -11,6 +12,11 @@ def input_error(func):
             return "Give me name and phone please."
         except IndexError:
             return "Enter user name."
+        except NotFoundError as e:
+            return e.message
+        except NotCorrectArgumentsError as e:
+            return e.message
+
     return inner
 
 @input_error
@@ -34,11 +40,15 @@ def add_contact(args, book: AddressBook):
   
 @input_error
 def change_contact(args, book: AddressBook):
+    if len(args) < 3:
+        raise NotCorrectArgumentsError("Not enough arguments. Provide name, old phone, and new phone.")
     name, old_phone, new_phone, *_ = args
     record = book.find(name)
     message = "Contact updated."
     if record is None:
         raise KeyError(name)
+    if record.find_phone(old_phone) is None:
+        raise NotFoundError("Old phone number not found.")
     if new_phone:
         record.edit_phone(old_phone, new_phone)
     return message
