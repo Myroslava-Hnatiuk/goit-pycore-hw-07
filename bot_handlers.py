@@ -34,13 +34,13 @@ def add_contact(args, book: AddressBook):
   
 @input_error
 def change_contact(args, book: AddressBook):
-    name, phone, *_ = args
+    name, old_phone, new_phone, *_ = args
     record = book.find(name)
     message = "Contact updated."
     if record is None:
         raise KeyError(name)
-    if phone:
-        record.edit_phone(record.phones[0].value, phone)
+    if new_phone:
+        record.edit_phone(old_phone, new_phone)
     return message
 
 @input_error
@@ -66,13 +66,12 @@ def show_all(book: AddressBook):
 def add_birthday(args, book: AddressBook):
     name, birthday, *_ = args
     record = book.find(name)
-    message = "'Contact's birthday' updated."
     if record is None:
         raise KeyError(name)
     if birthday:
-        record.add_birthday(birthday)
-        message = "Birthday added."
-    return message
+        if record.add_birthday(birthday):
+            return "Birthday added."
+    return ''
 
 @input_error
 def show_birthday(args, book: AddressBook):
