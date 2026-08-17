@@ -4,6 +4,7 @@ from datetime import datetime
 from birthday_handlers import get_upcoming_birthdays
 from dataclasses import dataclass
 
+
 phone_regex = r'^\d{10}$'
 
 @dataclass
@@ -30,11 +31,11 @@ class Birthday(Field):
         except ValueError:
             raise ValueError("Invalid date format. Use DD.MM.YYYY")
 
-@dataclass      
 class Record:
-    name: Name
-    phones: list[Phone] = []
-    birthday: Birthday = None
+    def __init__(self, name):
+        self.name = Name(name)
+        self.phones = []
+        self.birthday = None
 
     def add_phone(self, phone):
         self.phones.append(Phone(phone))
